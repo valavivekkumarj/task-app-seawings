@@ -9,7 +9,6 @@ import {
 } from "../controllers/user.controller.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
-
 const userRouter = express.Router({ mergeParams: true });
 
 /**
@@ -89,6 +88,10 @@ userRouter.route("/register").post(registerUser);
  *             required:
  *               - email
  *               - password
+ *             example:
+ *               email: "test@example.com"
+ *               password: "strongpassword"
+ 
  *     responses:
  *       200:
  *         description: User logged in successfully

@@ -15,9 +15,9 @@ const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "Hadiya Task API",
+            title: "Task API",
             version: "1.0.0",
-            description: "API documentation for Hadiya Task application",
+            description: "API documentation for Task application",
         },
         servers: [
             {
@@ -33,7 +33,7 @@ const swaggerSpec = swaggerJSDoc(swaggerOptions);
 const app = express();
 
 // Swagger setup
-app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api/v1/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(cors());
 app.use(express.json({ limit: "16kb" }));
