@@ -18,7 +18,7 @@ export const createProduct = asyncHandler(async (req, res) => {
     //trim and convert to lowercase:
     name = name.trim().toLowerCase();
     description = description.trim().toLowerCase();
-    price = Number(price.trim());
+    price = Number(price.toString().trim());
     category = category.trim().toLowerCase();
     //check for empty input
     if ([name, description, category].some((field) => field === "")) {

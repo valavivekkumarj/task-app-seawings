@@ -19,6 +19,20 @@ const swaggerOptions = {
             version: "1.0.0",
             description: "API documentation for Task application",
         },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT", // This indicates the token format is JWT
+                },
+            },
+        },
+        security: [
+            {
+                bearerAuth: [], // Apply bearer authentication globally
+            },
+        ],
         servers: [
             {
                 url: "http://localhost:3000/api/v1", // Update with your server URL

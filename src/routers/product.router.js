@@ -55,11 +55,11 @@ const productRouter = Router({ mergeParams: true });
 
 /**
  * @swagger
- * /create/{userId}:
+ * /product/create/{userId}:
  *   post:
  *     summary: Create a new product.
  *     tags:
- *       - Products
+ *       - Product
  *     parameters:
  *       - in: path
  *         name: userId
@@ -84,13 +84,114 @@ const productRouter = Router({ mergeParams: true });
 
 productRouter.route("/create/:userId").post(authMiddleware, createProduct);
 
+/**
+ *
+ *
+ * @swagger
+ * /product/update/{productId}:
+ *   patch:
+ *     tags:
+ *       - Product
+ *     summary: Update an existing product by its ID
+ *     description: Allows updating an existing product using its unique product ID. Provide the product details in the request body to modify the product.
+ *     operationId: updateProduct
+ *     parameters:
+ *       - in: path
+ *         name: productId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the product.
+ *     requestBody:
+ *       description: Product object that needs to be updated.
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Product'
+ *       required: true
+ *     responses:
+ *       '200':
+ *         description: Product successfully updated
+ *       '400':
+ *         description: Bad request. Invalid or missing input data.
+ *       '404':
+ *         description: Product not found with the given ID.
+ *       '401':
+ *         description: Unauthorized access. Invalid or missing credentials.
+ */
 
 productRouter.route("/update/:productId").patch(authMiddleware, updateProduct);
 
+/**
+ * @swagger
+ * /product/delete/{productId}:
+ *   delete:
+ *     tags:
+ *       - Product
+ *     summary: Delete product
+ *     description: Delete an existing product by its unique product ID.
+ *     operationId: deleteProduct
+ *     parameters:
+ *       - in: path
+ *         name: productId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the product to be deleted.
+ *     responses:
+ *       '200':
+ *         description: Product successfully deleted
+ *       '404':
+ *         description: Product not found with the given ID.
+ *       '401':
+ *         description: Unauthorized access. Invalid or missing credentials.
+ */
+
 productRouter.route("/delete/:productId").delete(authMiddleware, deleteProduct);
 
+/**
+ * @swagger
+ * /product/getAllList:
+ *   get:
+ *     tags:
+ *       - Product
+ *     summary: get all product
+ *     description: get all the product list.
+ *     operationId: getAllProduct
+ *     responses:
+ *       '200':
+ *         description: Products successfully fetched.
+ *       '404':
+ *         description: Products not found.
+ *       '401':
+ *         description: Unauthorized access. Invalid or missing credentials.
+ */
 productRouter.route("/getAllList").get(authMiddleware, getAll);
 
+/**
+ * @swagger
+ * /product/getAllList:
+ *   get:
+ *     tags:
+ *       - Product
+ *     summary: get product with its id.
+ *     description: get the product by its id.
+ *     operationId: getSpecific Product
+ *     parameters:
+ *       - in: path
+ *         name: productId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the product to be fetched.
+ *     responses:
+ *       '200':
+ *         description: Product successfully fetched.
+ *       '404':
+ *         description: Product not found.
+ *       '401':
+ *         description: Unauthorized access. Invalid or missing credentials.
+ */
 productRouter.route("/getSpecific/:productId").get(authMiddleware, getProduct);
 
 export default productRouter;
