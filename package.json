@@ -22,9 +22,11 @@
     "jsonwebtoken": "^9.0.2",
     "migrate-mongo": "^11.0.0",
     "mongoose": "^8.9.5",
+    "morgan": "^1.10.0",
     "nodemon": "^3.1.9",
     "path": "^0.12.7",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.17.0"
   }
 }

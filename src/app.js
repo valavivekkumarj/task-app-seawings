@@ -8,6 +8,10 @@ import productRouter from "./routers/product.router.js";
 import path from "path";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import logger from "./logger/logger.js";
+import morgan from "morgan";
+
+const morganFormat = ":method :url :status :response-time ms";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -52,6 +56,24 @@ app.use("/api/v1/api", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors());
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+
+//morgan logger middleware:
+app.use(
+    morgan(morganFormat, {
+        stream: {
+            write: (message) => {
+                const logObject = {
+                    method: message.split(" ")[0],
+                    url: message.split(" ")[1],
+                    status: message.split(" ")[2],
+                    responseTime: message.split(" ")[3],
+                };
+                logger.info(JSON.stringify(logObject));
+            },
+        },
+    })
+);
+//==================
 
 app.use("/api/v1", userRouter);
 app.use("/api/v1/product", productRouter);
